@@ -54,4 +54,14 @@ public class ListPipeTest {
         assertEquals(last, "C");
         assertEquals(2, pipeABC6.length());
     }
+
+    @Test
+    public void iterator_ABC() {
+        StringBuilder result = new StringBuilder();
+        for (String s : pipeABC6) {
+            result.append(s);
+        }
+
+        assertEquals("ABC", result.toString());
+    }
 }
