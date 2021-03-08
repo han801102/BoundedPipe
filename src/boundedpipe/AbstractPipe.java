@@ -51,11 +51,11 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof ListPipe)) {
+        if (!(obj instanceof Pipe)) {
             return false;
         }
 
-        ListPipe<?> that = (ListPipe<?>) obj;
+        Pipe<?> that = (Pipe<?>) obj;
         if (this.capacity() != that.capacity()) {
             return false;
         }
