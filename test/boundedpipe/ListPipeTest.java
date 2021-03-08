@@ -204,4 +204,12 @@ public class ListPipeTest {
         assertEquals(0, copy.length());
         assertEquals(pipeABC6.capacity(), copy.capacity());
     }
+
+    @Test
+    public void clear_ABC6() {
+        pipeABC6.clear();
+        int capacity = pipeABC6.capacity();
+        assertEquals(0, pipeABC6.length());
+        assertEquals(capacity, pipeABC6.capacity());
+    }
 }
