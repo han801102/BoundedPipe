@@ -212,4 +212,31 @@ public class ListPipeTest {
         assertEquals(0, pipeABC6.length());
         assertEquals(capacity, pipeABC6.capacity());
     }
+
+    @Test
+    public void appendAll_DEToABC_ABCDE() {
+        Pipe<String> p = new ListPipe<>(2);
+        p.append("D");
+        p.append("E");
+
+        pipeABC6.appendAll(p);
+
+        assertEquals(5, pipeABC6.length());
+        assertEquals(6, pipeABC6.capacity());
+        assertEquals("[A, B, C, D, E]:6", pipeABC6.toString());
+    }
+
+    @Test
+    public void appendAll_emptyToABC_ABC() {
+        pipeABC6.appendAll(pipeEmpty6);
+
+        assertEquals(3, pipeABC6.length());
+        assertEquals(6, pipeABC6.capacity());
+        assertEquals("[A, B, C]:6", pipeABC6.toString());
+    }
+
+    @Test
+    public void appendAll_DEArrayToABCList_ABCDE() {
+        // TODO: 3/8/21  
+    }
 }

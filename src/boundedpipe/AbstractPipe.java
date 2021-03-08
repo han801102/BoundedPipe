@@ -27,7 +27,11 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public void appendAll(Pipe<E> that) {
-        // TODO: 3/2/21
+        if (that.length() == 0) return;
+
+        E element = that.removeFirst();
+        this.append(element);
+        this.appendAll(that);
     }
 
     @Override
