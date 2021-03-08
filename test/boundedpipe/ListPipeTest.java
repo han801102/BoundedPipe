@@ -71,7 +71,7 @@ public class ListPipeTest {
     }
 
     @Test
-    public void toString_Empty() {
+    public void toString_empty() {
         assertEquals("[]:6", pipeEmpty6.toString());
     }
 
@@ -111,13 +111,13 @@ public class ListPipeTest {
     }
 
     @Test
-    public void equals_Empty6ToEmpty6_true() {
+    public void equals_empty6ToEmpty6_true() {
         Pipe<String> p = new ListPipe<>(6);
         assertTrue(pipeEmpty6.equals(p));
     }
 
     @Test
-    public void equals_Empty6ToEmpty5_false() {
+    public void equals_empty6ToEmpty5_false() {
         Pipe<String> p = new ListPipe<>(5);
         assertFalse(pipeEmpty6.equals(p));
     }
@@ -177,5 +177,31 @@ public class ListPipeTest {
     @Test
     public void hashCode_ABC6ListToABC6Array_true() {
         // TODO: 3/8/21
+    }
+
+    @Test
+    public void copy_ABC() {
+        Pipe<String> copy = pipeABC6.copy();
+        assertEquals(pipeABC6.capacity(), copy.capacity());
+        assertEquals(pipeABC6.length(), copy.length());
+        assertEquals(pipeABC6, copy);
+        String s1 = pipeABC6.removeFirst();
+        String copyS1 = copy.removeFirst();
+        assertTrue(s1 == copyS1);
+    }
+
+    @Test
+    public void copy_Empty() {
+        Pipe<String> copy = pipeEmpty6.copy();
+        assertEquals(pipeEmpty6.capacity(), copy.capacity());
+        assertEquals(pipeEmpty6.length(), copy.length());
+        assertEquals(pipeEmpty6, copy);
+    }
+
+    @Test
+    public void newInstance_empty() {
+        Pipe<String> copy = pipeABC6.newInstance();
+        assertEquals(0, copy.length());
+        assertEquals(pipeABC6.capacity(), copy.capacity());
     }
 }

@@ -32,8 +32,11 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public Pipe<E> copy() {
-        // TODO: 3/2/21
-        return null;
+        Pipe<E> result = this.newInstance();
+        for (E element : this) {
+            result.append(element);
+        }
+        return result;
     }
 
     @Override

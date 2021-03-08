@@ -200,7 +200,8 @@ public interface Pipe<E> extends Iterable<E>{
 
     /**
      * <p>
-     * Returns a copy of this pipe.
+     * Returns a copy of this pipe. The elements in the copy are
+     * references to the elements in this pipe.
      * </p>
      * <p>
      * Example:<br>

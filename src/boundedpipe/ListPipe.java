@@ -52,7 +52,7 @@ public class ListPipe<E> extends AbstractPipe<E> {
 
     @Override
     public Pipe<E> newInstance() {
-        return null;
+        return new ListPipe<>(capacity());
     }
 
     @Override
