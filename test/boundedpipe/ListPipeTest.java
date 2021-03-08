@@ -8,16 +8,13 @@ import static org.junit.Assert.*;
 public class ListPipeTest {
 
     private Pipe<String> pipeABC6;
-    private Pipe<String> pipeEmpty;
+    private Pipe<String> pipeEmpty6;
 
     @Before
     public void setUp() {
-        pipeABC6 = new ListPipe<>(6);
-        pipeABC6.append("A");
-        pipeABC6.append("B");
-        pipeABC6.append("C");
+        pipeABC6 = initABC(6);
 
-        pipeEmpty = new ListPipe<>(6);
+        pipeEmpty6 = new ListPipe<>(6);
     }
 
     @Test
@@ -75,6 +72,77 @@ public class ListPipeTest {
 
     @Test
     public void toString_Empty() {
-        assertEquals("[]:6", pipeEmpty.toString());
+        assertEquals("[]:6", pipeEmpty6.toString());
     }
+
+    @Test
+    public void equals_null_false() {
+        assertFalse(pipeABC6.equals(null));
+    }
+
+    @Test
+    public void equals_self_true() {
+        assertTrue(pipeABC6.equals(pipeABC6));
+    }
+
+    @Test
+    public void equals_ABC6ToABC6_true() {
+        Pipe<String> p = initABC(6);
+        assertTrue(pipeABC6.equals(p));
+    }
+
+    @Test
+    public void equals_ABC6ToString_false() {
+        assertFalse(pipeABC6.equals("[A, B, C]:6"));
+    }
+
+    @Test
+    public void equals_ABC6ToABC10_false() {
+        Pipe<String> p = initABC(10);
+        assertFalse(pipeABC6.equals(p));
+    }
+
+    @Test
+    public void equals_ABC6ToAB6_false() {
+        Pipe<String> p = new ListPipe<>(6);
+        p.append("A");
+        p.append("B");
+        assertFalse(pipeABC6.equals(p));
+    }
+
+    @Test
+    public void equals_Empty6ToEmpty6_true() {
+        Pipe<String> p = new ListPipe<>(6);
+        assertTrue(pipeEmpty6.equals(p));
+    }
+
+    @Test
+    public void equals_Empty6ToEmpty5_false() {
+        Pipe<String> p = new ListPipe<>(5);
+        assertFalse(pipeEmpty6.equals(p));
+    }
+
+    @Test
+    public void equals_ABC6ToDEF6_false() {
+        Pipe<String> p = new ListPipe<>(6);
+        p.append("D");
+        p.append("E");
+        p.append("F");
+        assertFalse(pipeABC6.equals(p));
+    }
+    
+    @Test
+    public void equals_ABC6ListToABC6Array_true() {
+        // TODO: 3/8/21
+    }
+
+    private Pipe<String> initABC(int capacity) {
+        Pipe<String> p = new ListPipe<>(capacity);
+        p.append("A");
+        p.append("B");
+        p.append("C");
+        return p;
+    }
+
+
 }

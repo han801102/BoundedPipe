@@ -38,8 +38,35 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public boolean equals(Object obj) {
-        // TODO: 3/2/21
-        return super.equals(obj);
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof ListPipe)) {
+            return false;
+        }
+
+        ListPipe<?> that = (ListPipe<?>) obj;
+        if (this.capacity() != that.capacity()) {
+            return false;
+        }
+        if (this.length() != that.length()) {
+            return false;
+        }
+
+        Iterator<E> thisIter = this.iterator();
+        Iterator<?> thatIter = that.iterator();
+        while(thisIter.hasNext()) {
+            E e = thisIter.next();
+            Object o = thatIter.next();
+            if (!e.equals(o)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
