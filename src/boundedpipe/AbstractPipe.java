@@ -71,8 +71,12 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public int hashCode() {
-        // TODO: 3/2/21
-        return super.hashCode();
+        int result = 17;
+        for (E element : this) {
+            result = 31 * result + element.hashCode();
+        }
+        result = 31 * result + capacity();
+        return result;
     }
 
     @Override

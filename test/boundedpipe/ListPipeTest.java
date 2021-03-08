@@ -144,5 +144,38 @@ public class ListPipeTest {
         return p;
     }
 
+    @Test
+    public void hashCode_ABC6ToABC6_true() {
+        Pipe<String> p = initABC(6);
 
+        assertTrue(pipeABC6.hashCode() == p.hashCode());
+    }
+
+    @Test
+    public void hashCode_ABC6ToABC10_false() {
+        Pipe<String> p = initABC(10);
+        assertFalse(pipeABC6.hashCode() == p.hashCode());
+    }
+
+    @Test
+    public void hashCode_ABC6ToAB6_false() {
+        Pipe<String> p = new ListPipe<>(6);
+        p.append("A");
+        p.append("B");
+        assertFalse(pipeABC6.hashCode() == p.hashCode());
+    }
+
+    @Test
+    public void hashCode_ABC6ToDEF6_false() {
+        Pipe<String> p = new ListPipe<>(6);
+        p.append("D");
+        p.append("E");
+        p.append("F");
+        assertFalse(pipeABC6.hashCode() == p.hashCode());
+    }
+
+    @Test
+    public void hashCode_ABC6ListToABC6Array_true() {
+        // TODO: 3/8/21
+    }
 }
