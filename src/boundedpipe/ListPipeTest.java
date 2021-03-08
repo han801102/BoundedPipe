@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 public class ListPipeTest {
 
     private Pipe<String> pipeABC6;
+    private Pipe<String> pipeEmpty;
 
     @Before
     public void setUp() {
@@ -15,6 +16,8 @@ public class ListPipeTest {
         pipeABC6.append("A");
         pipeABC6.append("B");
         pipeABC6.append("C");
+
+        pipeEmpty = new ListPipe<>(6);
     }
 
     @Test
@@ -63,5 +66,15 @@ public class ListPipeTest {
         }
 
         assertEquals("ABC", result.toString());
+    }
+
+    @Test
+    public void toString_ABC6() {
+        assertEquals("[A, B, C]:6", pipeABC6.toString());
+    }
+
+    @Test
+    public void toString_Empty() {
+        assertEquals("[]:6", pipeEmpty.toString());
     }
 }

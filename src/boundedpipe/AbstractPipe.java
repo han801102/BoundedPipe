@@ -1,5 +1,7 @@
 package boundedpipe;
 
+import java.util.Iterator;
+
 public abstract class AbstractPipe<E> implements Pipe<E> {
 
     private int capacity;
@@ -48,7 +50,18 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public String toString() {
-        // TODO: 3/2/21
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Iterator<E> iterator = iterator();
+        while(iterator.hasNext()) {
+            sb.append(iterator.next());
+            if (iterator.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        sb.append(":");
+        sb.append(capacity);
+        return sb.toString();
     }
 }
