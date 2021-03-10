@@ -29,6 +29,36 @@ public interface Pipe<E> extends Iterable<E>{
 
     /**
      * <p>
+     * Returns the first element in this pipe. Returns null if this pipe is empty.
+     * </p>
+     * <p>
+     * Example:<br>
+     * { <code>p = [A, B, C]:6</code> }<br>
+     * <code>f = p.first()</code><br>
+     * { <code>p = [A, B, C]:6</code> <em>and</em> <code>first = A</code> }<br>
+     * </p>
+     *
+     * @return the first element in this pipe
+     */
+    E first();
+
+    /**
+     * <p>
+     * Returns the last element in this pipe. Returns null if this pipe is empty.
+     * </p>
+     * <p>
+     * Example:<br>
+     * { <code>p = [A, B, C]:6</code> }<br>
+     * <code>l = p.last()</code><br>
+     * { <code>p = [A, B, C]:6</code> <em>and</em> <code>last = C</code> }<br>
+     * </p>
+     *
+     * @return the last element in this pipe
+     */
+    E last();
+
+    /**
+     * <p>
      * Adds the specified element to the beginning of this pipe.
      * </p>
      * <p>

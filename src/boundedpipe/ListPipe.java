@@ -14,6 +14,16 @@ public class ListPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
+    public E first() {
+        return isEmpty() ? null : list.get(0);
+    }
+
+    @Override
+    public E last() {
+        return isEmpty() ? null : list.get(list.size() - 1);
+    }
+
+    @Override
     public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
         if (isFull()) throw new IllegalStateException();
 

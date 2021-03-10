@@ -14,6 +14,16 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
+    public E first() {
+        return first == -1 ? null : elements[first];
+    }
+
+    @Override
+    public E last() {
+        return last == -1 ? null : elements[last];
+    }
+
+    @Override
     public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
         if (isFull()) throw new IllegalStateException();
 

@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public abstract class AbstractPipe<E> implements Pipe<E> {
 
-    private int capacity;
+    private final int capacity;
 
     public AbstractPipe(int capacity) {
         this.capacity = capacity;

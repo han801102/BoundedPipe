@@ -17,6 +17,16 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
+    public E first() {
+        return first == null ? null : first.content;
+    }
+
+    @Override
+    public E last() {
+        return last == null ? null : last.content;
+    }
+
+    @Override
     public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
         if (isFull()) throw new IllegalStateException();
 
