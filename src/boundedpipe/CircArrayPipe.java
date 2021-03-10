@@ -8,6 +8,7 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
     private int first = -1;
     private int last = -1;
 
+    @SuppressWarnings("unchecked")
     public CircArrayPipe(int capacity) {
         super(capacity);
         elements = (E[]) new Object[capacity];
@@ -24,10 +25,15 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
-    public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void prepend(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         if (isEmpty()) {
             first = 0;
@@ -41,10 +47,15 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
-    public void append(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void append(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         if (isEmpty()) {
             first = 0;
@@ -59,7 +70,9 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     @Override
     public E removeFirst() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         int preFirst = first;
         if (first == last) {
@@ -73,7 +86,9 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     @Override
     public E removeLast() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         int preLast = last;
         if (first == last) {
@@ -126,7 +141,9 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
         @Override
         public E next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
 
             int currentPtr = ptr;
             ptr = (ptr + 1) % capacity();

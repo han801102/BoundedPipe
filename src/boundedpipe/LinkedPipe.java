@@ -27,10 +27,15 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
-    public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void prepend(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         Node newNode = new Node();
         newNode.content = element;
@@ -50,10 +55,15 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
-    public void append(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void append(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         Node newNode = new Node();
         newNode.content = element;
@@ -73,7 +83,9 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
 
     @Override
     public E removeFirst() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         Node removeNode = first;
         if (length == 1) {
@@ -89,7 +101,9 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
 
     @Override
     public E removeLast() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         Node removeNode = last;
         if (length == 1) {
@@ -139,7 +153,9 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
 
         @Override
         public E next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
 
             E content = currentNode.content;
             currentNode = currentNode.next;

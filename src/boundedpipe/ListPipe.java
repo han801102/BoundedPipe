@@ -24,33 +24,47 @@ public class ListPipe<E> extends AbstractPipe<E> {
     }
 
     @Override
-    public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void prepend(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         list.add(0, element);
     }
 
     @Override
-    public void append(E element) throws IllegalStateException, IllegalArgumentException {
-        if (isFull()) throw new IllegalStateException();
+    public void append(E element) throws IllegalStateException,
+            IllegalArgumentException {
+        if (isFull()) {
+            throw new IllegalStateException();
+        }
 
-        if (element == null) throw new IllegalArgumentException();
+        if (element == null) {
+            throw new IllegalArgumentException();
+        }
 
         list.add(element);
     }
 
     @Override
     public E removeFirst() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         return list.remove(0);
     }
 
     @Override
     public E removeLast() throws IllegalStateException {
-        if (isEmpty()) throw new IllegalStateException();
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
 
         return list.remove(list.size() - 1);
     }

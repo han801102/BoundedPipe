@@ -22,14 +22,15 @@ package boundedpipe;
  * A pipe iterator iterates through the pipe from beginning to end.
  * </p>
  *
- * @author pohan
  * @param <E> the type of elements in this pipe
+ * @author pohan
  */
-public interface Pipe<E> extends Iterable<E>{
+public interface Pipe<E> extends Iterable<E> {
 
     /**
      * <p>
-     * Returns the first element in this pipe. Returns null if this pipe is empty.
+     * Returns the first element in this pipe. Returns null if this pipe is
+     * empty.
      * </p>
      * <p>
      * Example:<br>
@@ -44,7 +45,8 @@ public interface Pipe<E> extends Iterable<E>{
 
     /**
      * <p>
-     * Returns the last element in this pipe. Returns null if this pipe is empty.
+     * Returns the last element in this pipe. Returns null if this pipe is
+     * empty.
      * </p>
      * <p>
      * Example:<br>
@@ -69,10 +71,11 @@ public interface Pipe<E> extends Iterable<E>{
      * </p>
      *
      * @param element the element to be prepended to this pipe
-     * @throws IllegalStateException if this pipe is full
+     * @throws IllegalStateException    if this pipe is full
      * @throws IllegalArgumentException if the specified element is null
      */
-    void prepend(E element) throws IllegalStateException, IllegalArgumentException;
+    void prepend(E element) throws IllegalStateException,
+            IllegalArgumentException;
 
     /**
      * <p>
@@ -86,10 +89,11 @@ public interface Pipe<E> extends Iterable<E>{
      * </p>
      *
      * @param element the element to be appended to this pipe
-     * @throws IllegalStateException if this pipe is full
+     * @throws IllegalStateException    if this pipe is full
      * @throws IllegalArgumentException if the specified element is null
      */
-    void append(E element) throws IllegalStateException, IllegalArgumentException;
+    void append(E element) throws IllegalStateException,
+            IllegalArgumentException;
 
     /**
      * <p>
@@ -155,7 +159,8 @@ public interface Pipe<E> extends Iterable<E>{
 
     /**
      * <p>
-     * Creates and returns a new, empty bounded pipe with the same capacity as this pipe.
+     * Creates and returns a new, empty bounded pipe with the same capacity as
+     * this pipe.
      * </p>
      * <p>
      * Example:<br>
@@ -178,7 +183,6 @@ public interface Pipe<E> extends Iterable<E>{
      * <code>p.clear()</code><br>
      * { <code>p = []:6</code> }<br>
      * </p>
-     *
      */
     void clear();
 
@@ -199,16 +203,19 @@ public interface Pipe<E> extends Iterable<E>{
 
     /**
      * <p>
-     * Returns true if the length equals to the capacity of this pipe, otherwise false.
+     * Returns true if the length equals to the capacity of this pipe, otherwise
+     * false.
      * </p>
      * <p>
      * Example:<br>
      * { <code>p = [A, B, C, D, E, F]:6</code> }<br>
      * <code>f = p.isFull()</code><br>
-     * { <code>p = [A, B, C, D, E, F]:6</code> <em>and</em> <code>f = true</code> }<br>
+     * { <code>p = [A, B, C, D, E, F]:6</code> <em>and</em>
+     * <code>f = true</code> }<br>
      * </p>
      *
-     * @return true if the length equals to the capacity of this pipe, otherwise false
+     * @return true if the length equals to the capacity of this pipe, otherwise
+     * false
      */
     boolean isFull();
 
@@ -218,9 +225,11 @@ public interface Pipe<E> extends Iterable<E>{
      * </p>
      * <p>
      * Example:<br>
-     * { <code>p = [A, B, C]:6</code> <em>and</em> <code>p1 = [D, E]:6</code> }<br>
+     * { <code>p = [A, B, C]:6</code> <em>and</em> <code>p1 = [D, E]:6</code> }
+     * <br>
      * <code>p.appendAll(p1)</code><br>
-     * { <code>p = [A, B, C, D, E]:6</code> <em>and</em> <code>p1 = [D, E]:6</code> }<br>
+     * { <code>p = [A, B, C, D, E]:6</code> <em>and</em>
+     * <code>p1 = [D, E]:6</code> }<br>
      * </p>
      *
      * @param that the pipe to be appended to this pipe
@@ -237,9 +246,9 @@ public interface Pipe<E> extends Iterable<E>{
      * Example:<br>
      * { <code>p = [A, B, C]:6</code> }<br>
      * <code>p1 = p.copy()</code><br>
-     * { <code>p = [A, B, C, D, E]:6</code> <em>and</em> <code>p1 = [A, B, C, D, E]:6</code> }<br>
+     * { <code>p = [A, B, C, D, E]:6</code> <em>and</em>
+     * <code>p1 = [A, B, C, D, E]:6</code> }<br>
      * </p>
-     *
      *
      * @return a copy of this pipe.
      */
