@@ -15,9 +15,9 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     @Override
     public void prepend(E element) throws IllegalStateException, IllegalArgumentException {
-        if (element == null) throw new IllegalArgumentException();
-
         if (isFull()) throw new IllegalStateException();
+
+        if (element == null) throw new IllegalArgumentException();
 
         if (isEmpty()) {
             first = 0;
@@ -32,9 +32,9 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     @Override
     public void append(E element) throws IllegalStateException, IllegalArgumentException {
-        if (element == null) throw new IllegalArgumentException();
-
         if (isFull()) throw new IllegalStateException();
+
+        if (element == null) throw new IllegalArgumentException();
 
         if (isEmpty()) {
             first = 0;
