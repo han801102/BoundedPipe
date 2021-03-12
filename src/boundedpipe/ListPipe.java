@@ -26,12 +26,12 @@ public class ListPipe<E> extends AbstractPipe<E> {
     @Override
     public void prepend(E element) throws IllegalStateException,
             IllegalArgumentException {
-        if (isFull()) {
-            throw new IllegalStateException();
-        }
-
         if (element == null) {
             throw new IllegalArgumentException();
+        }
+
+        if (isFull()) {
+            throw new IllegalStateException();
         }
 
         list.add(0, element);
@@ -40,12 +40,12 @@ public class ListPipe<E> extends AbstractPipe<E> {
     @Override
     public void append(E element) throws IllegalStateException,
             IllegalArgumentException {
-        if (isFull()) {
-            throw new IllegalStateException();
-        }
-
         if (element == null) {
             throw new IllegalArgumentException();
+        }
+
+        if (isFull()) {
+            throw new IllegalStateException();
         }
 
         list.add(element);

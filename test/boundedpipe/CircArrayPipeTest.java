@@ -3,6 +3,9 @@ package boundedpipe;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
@@ -58,7 +61,7 @@ public class CircArrayPipeTest {
         pipeFull3.prepend("X");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void prependNull_full_exception() {
         pipeFull3.prepend(null);
     }
@@ -87,7 +90,7 @@ public class CircArrayPipeTest {
         pipeFull3.append("X");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void appendNull_full_exception() {
         pipeFull3.append(null);
     }
@@ -155,6 +158,12 @@ public class CircArrayPipeTest {
         assertEquals("", result.toString());
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void iterator_emptyOnce_exception() {
+        Iterator<String> iterator = pipeEmpty6.iterator();
+        iterator.next();
+    }
+
     @Test
     public void toString_ABC6() {
         assertEquals("[A, B, C]:6", pipeABC6.toString());
@@ -177,7 +186,7 @@ public class CircArrayPipeTest {
 
     @Test
     public void equals_ABC6ToABC6_true() {
-        Pipe<String> p = initABC(6);
+        Pipe<String> p = initPipe(6, "A", "B", "C");
         assertTrue(pipeABC6.equals(p));
     }
 
@@ -188,85 +197,92 @@ public class CircArrayPipeTest {
 
     @Test
     public void equals_ABC6ToABC10_false() {
-        Pipe<String> p = initABC(10);
+        Pipe<String> p = initPipe(10, "A", "B", "C");
         assertFalse(pipeABC6.equals(p));
     }
 
     @Test
     public void equals_ABC6ToAB6_false() {
-        Pipe<String> p = new ListPipe<>(6);
-        p.append("A");
-        p.append("B");
+        Pipe<String> p = initPipe(6, "A", "B");
         assertFalse(pipeABC6.equals(p));
     }
 
     @Test
     public void equals_empty6ToEmpty6_true() {
-        Pipe<String> p = new ListPipe<>(6);
+        Pipe<String> p = initPipe(6);
         assertTrue(pipeEmpty6.equals(p));
     }
 
     @Test
     public void equals_empty6ToEmpty5_false() {
-        Pipe<String> p = new ListPipe<>(5);
+        Pipe<String> p = initPipe(5);
         assertFalse(pipeEmpty6.equals(p));
     }
 
     @Test
     public void equals_ABC6ToDEF6_false() {
-        Pipe<String> p = new ListPipe<>(6);
-        p.append("D");
-        p.append("E");
-        p.append("F");
+        Pipe<String> p = initPipe(6, "D", "E", "F");
         assertFalse(pipeABC6.equals(p));
     }
 
     @Test
     public void equals_ABC6ListToABC6Array_true() {
-        // TODO: 3/8/21
+        Pipe<String> listPipe = new ListPipe<>(6);
+        listPipe.append("A");
+        listPipe.append("B");
+        listPipe.append("C");
+        assertTrue(pipeABC6.equals(listPipe));
     }
 
-    private Pipe<String> initABC(int capacity) {
-        Pipe<String> p = new ListPipe<>(capacity);
-        p.append("A");
-        p.append("B");
-        p.append("C");
-        return p;
+    @Test
+    public void equals_ABC6LinkedToABC6Array_true() {
+        Pipe<String> linkedPipe = new LinkedPipe<>(6);
+        linkedPipe.append("A");
+        linkedPipe.append("B");
+        linkedPipe.append("C");
+        assertTrue(pipeABC6.equals(linkedPipe));
     }
 
     @Test
     public void hashCode_ABC6ToABC6_true() {
-        Pipe<String> p = initABC(6);
-
+        Pipe<String> p = initPipe(6, "A", "B", "C");
         assertTrue(pipeABC6.hashCode() == p.hashCode());
     }
 
     @Test
     public void hashCode_ABC6ToABC10_false() {
-        Pipe<String> p = initABC(10);
+        Pipe<String> p = initPipe(10, "A", "B", "C");
         assertFalse(pipeABC6.hashCode() == p.hashCode());
     }
 
     @Test
     public void hashCode_ABC6ToAB6_false() {
-        Pipe<String> p = new ListPipe<>(6);
-        p.append("A");
-        p.append("B");
+        Pipe<String> p = initPipe(6, "A", "B");
         assertFalse(pipeABC6.hashCode() == p.hashCode());
     }
 
     @Test
     public void hashCode_ABC6ToDEF6_false() {
-        Pipe<String> p = new ListPipe<>(6);
-        p.append("D");
-        p.append("E");
-        p.append("F");
+        Pipe<String> p = initPipe(6, "D", "E", "F");
         assertFalse(pipeABC6.hashCode() == p.hashCode());
     }
 
     @Test
     public void hashCode_ABC6ListToABC6Array_true() {
-        // TODO: 3/8/21
+        Pipe<String> listPipe = new ListPipe<>(6);
+        listPipe.append("A");
+        listPipe.append("B");
+        listPipe.append("C");
+        assertTrue(pipeABC6.hashCode() == listPipe.hashCode());
+    }
+
+    @Test
+    public void hashCode_ABC6LinkedToABC6Array_true() {
+        Pipe<String> linkedPipe = new LinkedPipe<>(6);
+        linkedPipe.append("A");
+        linkedPipe.append("B");
+        linkedPipe.append("C");
+        assertTrue(pipeABC6.hashCode() == linkedPipe.hashCode());
     }
 
     @Test
@@ -305,9 +321,7 @@ public class CircArrayPipeTest {
 
     @Test
     public void appendAll_DEToABC_ABCDE() {
-        Pipe<String> p = new ListPipe<>(2);
-        p.append("D");
-        p.append("E");
+        Pipe<String> p = initPipe(2, "D", "E");
 
         pipeABC6.appendAll(p);
 
@@ -325,8 +339,56 @@ public class CircArrayPipeTest {
         assertEquals("[A, B, C]:6", pipeABC6.toString());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void appendAll_nullToABC_exception() {
+        pipeABC6.appendAll(null);
+    }
+
     @Test
-    public void appendAll_DEArrayToABCList_ABCDE() {
-        // TODO: 3/8/21
+    public void appendAll_DEListToABCArray_ABCDE() {
+        Pipe<String> listPipe = new ListPipe<>(3);
+        listPipe.append("D");
+        listPipe.append("E");
+
+        pipeABC6.appendAll(listPipe);
+        assertEquals(5, pipeABC6.length());
+        assertEquals(6, pipeABC6.capacity());
+        assertEquals("[A, B, C, D, E]:6", pipeABC6.toString());
+    }
+
+    @Test
+    public void appendAll_DELinkedToABCArray_ABCDE() {
+        Pipe<String> linkedPipe = new LinkedPipe<>(3);
+        linkedPipe.append("D");
+        linkedPipe.append("E");
+
+        pipeABC6.appendAll(linkedPipe);
+        assertEquals(5, pipeABC6.length());
+        assertEquals(6, pipeABC6.capacity());
+        assertEquals("[A, B, C, D, E]:6", pipeABC6.toString());
+    }
+
+    @Test
+    public void first_ABC_A() {
+        String first = pipeABC6.first();
+        assertEquals(first, "A");
+    }
+
+    @Test
+    public void first_empty_null() {
+        String first = pipeEmpty6.first();
+        assertNull(first);
+    }
+
+    @Test
+    public void last_ABC_C() {
+        String last = pipeABC6.last();
+        assertEquals(last, "C");
+    }
+
+    @Test
+    public void last_empty_null() {
+        String last = pipeEmpty6.last();
+        assertNull(last);
     }
 }

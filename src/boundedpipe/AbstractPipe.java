@@ -2,6 +2,9 @@ package boundedpipe;
 
 import java.util.Iterator;
 
+/**
+ * @inheritDoc
+ */
 public abstract class AbstractPipe<E> implements Pipe<E> {
 
     private final int capacity;
@@ -27,6 +30,10 @@ public abstract class AbstractPipe<E> implements Pipe<E> {
 
     @Override
     public void appendAll(Pipe<E> that) {
+        if (that == null) {
+            throw new IllegalArgumentException();
+        }
+
         if (that.length() == 0) {
             return;
         }
