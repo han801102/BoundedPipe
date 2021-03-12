@@ -391,4 +391,20 @@ public class CircArrayPipeTest {
         String last = pipeEmpty6.last();
         assertNull(last);
     }
+
+    @Test
+    public void removeFirstTwiceAppendXY_ABC_CXY() {
+        Pipe<String> p = initPipe(4, "A", "B", "C");
+        String f = p.removeFirst();
+        assertEquals(f, "A");
+        assertEquals(2, p.length());
+        f = p.removeFirst();
+        assertEquals(f, "B");
+        assertEquals(1, p.length());
+        p.append("X");
+        assertEquals(2, p.length());
+        p.append("Y");
+        assertEquals(3, p.length());
+        assertEquals("[C, X, Y]:4", p.toString());
+    }
 }

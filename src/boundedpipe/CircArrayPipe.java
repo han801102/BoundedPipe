@@ -132,11 +132,11 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     class PipeIterator implements Iterator<E> {
         private int ptr = first;
-        private final int end = (last + 1) % capacity();
+        private int count = 0;
 
         @Override
         public boolean hasNext() {
-            return !isEmpty() && ptr != end;
+            return count != length();
         }
 
         @Override
@@ -145,6 +145,7 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
                 throw new NoSuchElementException();
             }
 
+            count++;
             int currentPtr = ptr;
             ptr = (ptr + 1) % capacity();
             return elements[currentPtr];
