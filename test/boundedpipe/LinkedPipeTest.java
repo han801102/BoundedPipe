@@ -34,7 +34,12 @@ public class LinkedPipeTest {
 
     @Test
     public void length_ABC_3() {
-        assertEquals(pipeABC6.length(), 3);
+        assertEquals(3, pipeABC6.length());
+    }
+
+    @Test
+    public void length_empty_0() {
+        assertEquals(0, pipeEmpty6.length());
     }
 
     @Test
@@ -103,14 +108,14 @@ public class LinkedPipeTest {
     @Test
     public void removeFirst_ABC_A() {
         String first = pipeABC6.removeFirst();
-        assertEquals(first, "A");
+        assertEquals("A", first);
         assertEquals(2, pipeABC6.length());
     }
 
     @Test
     public void removeFirst_A_A() {
         String first = pipeA3.removeFirst();
-        assertEquals(first, "A");
+        assertEquals("A", first);
         assertEquals(0, pipeA3.length());
     }
 
@@ -122,14 +127,14 @@ public class LinkedPipeTest {
     @Test
     public void removeLast_ABC_C() {
         String last = pipeABC6.removeLast();
-        assertEquals(last, "C");
+        assertEquals("C", last);
         assertEquals(2, pipeABC6.length());
     }
 
     @Test
     public void removeLast_A_A() {
         String last = pipeA3.removeLast();
-        assertEquals(last, "A");
+        assertEquals("A", last);
         assertEquals(0, pipeA3.length());
     }
 
