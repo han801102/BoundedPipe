@@ -114,7 +114,7 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
 
     @Override
     public int length() {
-        if (last == -1 && first == -1) {
+        if (first == -1) {
             return 0;
         } else {
             int realLast = last >= first ? last : last + capacity();
