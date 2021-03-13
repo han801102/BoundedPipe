@@ -4,10 +4,22 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Pipe implemented by build-in list.
+ *
+ * @author pohan(pohan)
+ * @param <E> the type of elements in this pipe
+ * @version 1.0
+ */
 public class ListPipe<E> extends AbstractPipe<E> {
 
     private final List<E> list;
 
+    /**
+     * Constructor
+     *
+     * @param capacity the number of element that this pipe can hold
+     */
     public ListPipe(int capacity) {
         super(capacity);
         list = new LinkedList<>();

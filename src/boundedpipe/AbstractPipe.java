@@ -3,12 +3,21 @@ package boundedpipe;
 import java.util.Iterator;
 
 /**
- * @inheritDoc
+ * Abstract Pipe.
+ *
+ * @author pohan(pohan)
+ * @param <E> the type of elements in this pipe
+ * @version 1.0
  */
 public abstract class AbstractPipe<E> implements Pipe<E> {
 
     private final int capacity;
 
+    /**
+     * Constructor
+     *
+     * @param capacity the number of element that this pipe can hold
+     */
     public AbstractPipe(int capacity) {
         this.capacity = capacity;
     }

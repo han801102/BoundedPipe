@@ -3,12 +3,24 @@ package boundedpipe;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Pipe implemented by linked list.
+ *
+ * @author pohan(pohan)
+ * @param <E> the type of elements in this pipe
+ * @version 1.0
+ */
 public class LinkedPipe<E> extends AbstractPipe<E> {
 
     private Node first;
     private Node last;
     private int length;
 
+    /**
+     * Constructor
+     *
+     * @param capacity the number of element that this pipe can hold
+     */
     public LinkedPipe(int capacity) {
         super(capacity);
         first = null;

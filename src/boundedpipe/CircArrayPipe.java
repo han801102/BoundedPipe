@@ -3,11 +3,23 @@ package boundedpipe;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Pipe implemented by circular approach.
+ *
+ * @author pohan(pohan)
+ * @param <E> the type of elements in this pipe
+ * @version 1.0
+ */
 public class CircArrayPipe<E> extends AbstractPipe<E> {
     final private E[] elements;
     private int first = -1;
     private int last = -1;
 
+    /**
+     * Constructor
+     *
+     * @param capacity the number of element that this pipe can hold
+     */
     @SuppressWarnings("unchecked")
     public CircArrayPipe(int capacity) {
         super(capacity);
