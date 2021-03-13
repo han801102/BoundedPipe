@@ -24,6 +24,7 @@ package boundedpipe;
  *
  * @param <E> the type of elements in this pipe
  * @author pohan(pohan)
+ * @version 1.0
  */
 public interface Pipe<E> extends Iterable<E> {
 

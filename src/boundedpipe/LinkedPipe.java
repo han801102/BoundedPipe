@@ -55,14 +55,13 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
 
         if (first == null) {
             newNode.next = null;
-            first = newNode;
             last = newNode;
-        } else {
+        }
+        else {
             newNode.next = first;
             first.prev = newNode;
-            first = newNode;
         }
-
+        first = newNode;
         length++;
     }
 
@@ -84,12 +83,12 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         if (last == null) {
             newNode.prev = null;
             first = newNode;
-            last = newNode;
-        } else {
+        }
+        else {
             newNode.prev = last;
             last.next = newNode;
-            last = newNode;
         }
+        last = newNode;
         length++;
     }
 
@@ -102,7 +101,8 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         Node removeNode = first;
         if (length == 1) {
             reset();
-        } else {
+        }
+        else {
             first = first.next;
             first.prev = null;
             length--;
@@ -120,7 +120,8 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         Node removeNode = last;
         if (length == 1) {
             reset();
-        } else {
+        }
+        else {
             last = last.prev;
             last.next = null;
             length--;
@@ -144,6 +145,9 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         reset();
     }
 
+    /**
+     * Reset first and last to -1 when this pipe is empty.
+     */
     private void reset() {
         first = null;
         last = null;
@@ -155,6 +159,9 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         return new PipeIterator();
     }
 
+    /**
+     * Pipe iterator
+     */
     class PipeIterator implements Iterator<E> {
         private Node currentNode = first;
 
@@ -175,9 +182,12 @@ public class LinkedPipe<E> extends AbstractPipe<E> {
         }
     }
 
+    /**
+     * Linked list node.
+     */
     class Node {
-        public E content;
-        public Node prev;
-        public Node next;
+        private E content;
+        private Node prev;
+        private Node next;
     }
 }

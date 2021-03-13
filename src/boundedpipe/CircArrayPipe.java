@@ -89,7 +89,8 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
         int preFirst = first;
         if (first == last) {
             resetPtr();
-        } else {
+        }
+        else {
             first = (first + capacity() + 1) % capacity();
         }
 
@@ -105,7 +106,8 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
         int preLast = last;
         if (first == last) {
             resetPtr();
-        } else {
+        }
+        else {
             last = (last + capacity() - 1) % capacity();
         }
 
@@ -116,7 +118,8 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
     public int length() {
         if (first == -1) {
             return 0;
-        } else {
+        }
+        else {
             int realLast = last >= first ? last : last + capacity();
             return realLast - first + 1;
         }
@@ -137,11 +140,17 @@ public class CircArrayPipe<E> extends AbstractPipe<E> {
         return new PipeIterator();
     }
 
+    /**
+     * Reset first and last to -1 when this pipe is empty.
+     */
     private void resetPtr() {
         first = -1;
         last = -1;
     }
 
+    /**
+     * Pipe iterator
+     */
     class PipeIterator implements Iterator<E> {
         private int ptr = first;
         private int count = 0;
